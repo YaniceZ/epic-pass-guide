@@ -102,6 +102,61 @@
   .weather-stats .v{font-family:var(--serif); font-size:24px; color:var(--snow); font-weight:600;}
   .weather-stats .l{font-size:11px; color:var(--muted); margin-top:2px;}
   .weather-err{font-size:12.5px; color:var(--coral);}
+  .weather-sub{margin-top:14px; padding-top:12px; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:baseline; font-size:12.5px;}
+  .weather-sub .l{color:var(--muted); font-size:11px;}
+  .weather-sub .v{font-family:var(--serif); font-size:17px; color:var(--snow-dim); font-weight:600;}
+  .official-link{
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    margin-top:14px; padding:12px 14px; border:1px solid var(--line); border-radius:var(--radius);
+    font-size:12.5px; color:var(--snow-dim); text-decoration:none; transition:border-color .15s, color .15s;
+  }
+  .official-link:hover{border-color:var(--ice); color:var(--ice);}
+  .official-link .arrow{font-family:var(--mono); font-size:14px;}
+  .basedepth-note{margin-top:10px; font-size:11.5px; color:var(--muted); line-height:1.5;}
+
+  /* --- Day tracker --- */
+  .tracker{margin:36px 0 0; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden;}
+  .tracker-head{padding:22px 24px; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap;}
+  .tracker-head h3{font-family:var(--serif); font-size:18px; margin:0 0 4px;}
+  .tracker-head p{font-size:12.5px; color:var(--muted); margin:0;}
+  .quota-visual{display:flex; gap:5px; align-items:center;}
+  .pip{width:22px; height:8px; border-radius:2px; background:rgba(255,255,255,0.09); transition:background .2s;}
+  .pip.used{background:var(--gold);}
+  .pip.over{background:var(--coral);}
+  .quota-count{font-family:var(--serif); font-size:26px; font-weight:600; color:var(--gold); margin-left:10px;}
+  .quota-count.over{color:var(--coral);}
+  .log-form{padding:20px 24px; display:flex; gap:10px; align-items:flex-end; flex-wrap:wrap; border-bottom:1px solid var(--line);}
+  .log-field{display:flex; flex-direction:column; gap:6px; flex:1; min-width:150px;}
+  .log-field label{font-family:var(--mono); font-size:10.5px; color:var(--muted);}
+  .log-field select, .log-field input{
+    background:var(--ink-2); border:1px solid var(--line); color:var(--snow);
+    padding:9px 11px; border-radius:var(--radius); font-family:var(--body); font-size:13px;
+    color-scheme:dark;
+  }
+  .log-field select:focus, .log-field input:focus{outline:2px solid var(--ice); outline-offset:1px;}
+  .log-btn{
+    padding:10px 20px; border-radius:var(--radius); border:none; background:var(--ice); color:var(--ink);
+    font-family:var(--body); font-weight:600; font-size:13px; cursor:pointer; transition:opacity .15s;
+  }
+  .log-btn:hover{opacity:.85;}
+  .log-list{max-height:260px; overflow-y:auto;}
+  .log-row{display:flex; justify-content:space-between; align-items:center; gap:12px; padding:12px 24px; border-bottom:1px solid var(--line); font-size:13px;}
+  .log-row:last-child{border-bottom:none;}
+  .log-row .when{font-family:var(--mono); font-size:11.5px; color:var(--muted); min-width:88px;}
+  .log-row .where{flex:1; color:var(--snow-dim);}
+  .log-row .tag{font-family:var(--mono); font-size:10px; padding:3px 8px; border-radius:100px;}
+  .log-row .tag.square{background:var(--gold-dim); color:var(--gold);}
+  .log-row .tag.circle{background:var(--ice-dim); color:var(--ice);}
+  .log-row .tag.diamond{background:var(--coral-dim); color:var(--coral);}
+  .del-btn{background:none; border:none; color:var(--muted); cursor:pointer; font-size:16px; line-height:1; padding:2px 6px; border-radius:2px;}
+  .del-btn:hover{color:var(--coral);}
+  .log-empty{padding:26px 24px; text-align:center; color:var(--muted); font-size:13px;}
+  .tracker-foot{padding:14px 24px; font-size:11.5px; color:var(--muted); background:rgba(255,255,255,0.02); display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap; align-items:center;}
+  .tracker-foot button{background:none; border:1px solid var(--line); color:var(--muted); font-family:var(--mono); font-size:10.5px; padding:5px 11px; border-radius:100px; cursor:pointer;}
+  .tracker-foot button:hover{border-color:var(--coral); color:var(--coral);}
+  .season-tally{display:flex; gap:26px; flex-wrap:wrap; padding:18px 24px; border-bottom:1px solid var(--line);}
+  .season-tally div .n{font-family:var(--serif); font-size:20px; font-weight:600; color:var(--snow);}
+  .season-tally div .l{font-size:11px; color:var(--muted); margin-top:2px;}
   @media (max-width:860px){ .map-shell{grid-template-columns:1fr;} #map{height:400px;} .detail-panel{max-height:none;} }
 
   .filters{display:flex; gap:8px; flex-wrap:wrap; margin:34px 0 4px;}
@@ -172,6 +227,7 @@
     <nav class="navlinks">
       <a href="#tiers" data-i18n="nav1">Access tiers</a>
       <a href="#map-section" data-i18n="nav2">Map</a>
+      <a href="#tracker-section" data-i18n="nav5">Season log</a>
       <a href="#outlook" data-i18n="nav3">2026–27 outlook</a>
       <a href="#basecamp" data-i18n="nav4">Base camp: YVR</a>
       <button id="langToggle">中文</button>
@@ -252,6 +308,46 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="#8FA6B8" stroke-width="1.4"><path d="M2 20L9 7L13 14L16 9L22 20H2Z"/></svg>
           <span data-i18n="m-empty">Click any marker on the map to see access rules, best months, and live conditions.</span>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tracker-section">
+    <div class="section-head">
+      <h2 data-i18n="tr-h2">Your season log</h2>
+      <p class="desc" data-i18n="tr-desc">Track pooled-day usage across Canadian Rockies resorts. Saved in this browser only — no account, nothing sent anywhere.</p>
+    </div>
+    <div class="tracker">
+      <div class="tracker-head">
+        <div>
+          <h3 data-i18n="tr-quota-h">Canadian Rockies pooled days</h3>
+          <p data-i18n="tr-quota-p">Shared across Fernie, Kicking Horse, Kimberley and Nakiska.</p>
+        </div>
+        <div style="display:flex; align-items:center;">
+          <div class="quota-visual" id="quotaVisual"></div>
+          <div class="quota-count" id="quotaCount">0/7</div>
+        </div>
+      </div>
+
+      <div class="season-tally" id="seasonTally"></div>
+
+      <div class="log-form">
+        <div class="log-field">
+          <label for="logResort" data-i18n="tr-f-resort">Resort</label>
+          <select id="logResort"></select>
+        </div>
+        <div class="log-field">
+          <label for="logDate" data-i18n="tr-f-date">Date</label>
+          <input type="date" id="logDate">
+        </div>
+        <button class="log-btn" id="logBtn" data-i18n="tr-f-btn">Log a day</button>
+      </div>
+
+      <div class="log-list" id="logList"></div>
+
+      <div class="tracker-foot">
+        <span data-i18n="tr-foot">Stored locally in this browser. Clearing site data will erase it.</span>
+        <button id="clearLog" data-i18n="tr-clear">Clear all</button>
       </div>
     </div>
   </section>
@@ -351,6 +447,16 @@ const I18N = {
     langBtn:"中文",
     detailAccess:"Access", detailBest:"Best months", detailOpens:"Typical opening",
     weatherHead:"LIVE CONDITIONS", weatherTemp:"Now (°C)", weatherSnow:"Snow, next 3d (cm)", weatherLoading:"Fetching live data…", weatherErr:"Live data unavailable right now.",
+    weatherPast:"Fell in the last 7 days", officialLink:"Official snow report", baseNote:"Base depth comes from the resort's own measurements — open the official report for that.",
+    nav5:"Season log",
+    "tr-h2":"Your season log","tr-desc":"Track pooled-day usage across Canadian Rockies resorts. Saved in this browser only — no account, nothing sent anywhere.",
+    "tr-quota-h":"Canadian Rockies pooled days","tr-quota-p":"Shared across Fernie, Kicking Horse, Kimberley and Nakiska.",
+    "tr-f-resort":"Resort","tr-f-date":"Date","tr-f-btn":"Log a day",
+    "tr-foot":"Stored locally in this browser. Clearing site data will erase it.","tr-clear":"Clear all",
+    trEmpty:"No days logged yet. Add one above to start tracking.",
+    trTallyDays:"Days logged", trTallyResorts:"Resorts visited", trTallyPooled:"Pooled days left",
+    trOverQuota:"Over the 7-day allowance — extra days are 50% off, not free.",
+    trDupe:"That resort is already logged for that date.", trNoDate:"Pick a date first.",
     driveW:"Whistler Blackcomb", driveS:"Stevens Pass, WA", driveK:"Kicking Horse, Golden", driveF:"Fernie, Kootenays",
     plan1:"Whistler", plan1v:"Default weekends", plan2:"RCR road trip (Golden / Fernie)", plan2v:"7 pooled days", plan3:"One flight anchor trip", plan3v:"Japan or Europe",
   },
@@ -383,6 +489,16 @@ const I18N = {
     langBtn:"EN",
     detailAccess:"使用规则", detailBest:"最佳月份", detailOpens:"通常开板时间",
     weatherHead:"实时天气", weatherTemp:"当前气温 (°C)", weatherSnow:"未来3天降雪 (cm)", weatherLoading:"正在获取实时数据…", weatherErr:"暂时无法获取实时数据。",
+    weatherPast:"过去7天实际降雪", officialLink:"官方雪况报告", baseNote:"雪基厚度来自雪场自己的测量，点上方链接查看官方数据。",
+    nav5:"雪季记录",
+    "tr-h2":"我的雪季记录","tr-desc":"记录加拿大落基山共享天数的使用情况。只存在这个浏览器本地，不需要账号，数据不会上传。",
+    "tr-quota-h":"加拿大落基山共享天数","tr-quota-p":"Fernie、Kicking Horse、Kimberley、Nakiska 共用同一额度。",
+    "tr-f-resort":"雪场","tr-f-date":"日期","tr-f-btn":"记录一天",
+    "tr-foot":"数据存在这个浏览器本地，清除网站数据会一并删除。","tr-clear":"清空全部",
+    trEmpty:"还没有记录。在上方添加第一条开始追踪。",
+    trTallyDays:"已记录天数", trTallyResorts:"去过的雪场", trTallyPooled:"共享额度剩余",
+    trOverQuota:"已超过7天额度——超出部分是5折，不是免费。",
+    trDupe:"这个雪场在这一天已经记录过了。", trNoDate:"请先选择日期。",
     driveW:"Whistler Blackcomb", driveS:"Stevens Pass（华盛顿州）", driveK:"Kicking Horse（Golden）", driveF:"Fernie（Kootenays）",
     plan1:"Whistler", plan1v:"日常周末主场", plan2:"公路旅行（Golden / Fernie）", plan2v:"用掉7天共享额度", plan3:"一趟飞行远征", plan3v:"日本或欧洲",
   }
@@ -398,61 +514,62 @@ function applyLang(lang){
   });
   document.getElementById('langToggle').textContent = I18N[lang].langBtn;
   renderOutlook(); renderBasecamp(); renderCalendar();
+  if(typeof renderTracker === 'function') renderTracker();
   if(activeResort) renderDetail(activeResort);
 }
 document.getElementById('langToggle').addEventListener('click', ()=> applyLang(currentLang === 'en' ? 'zh' : 'en'));
 
 /* ---------------- Resort data ---------------- */
 const RESORTS = [
-  {id:'whistler', name:'Whistler Blackcomb', region:'British Columbia, Canada', lat:50.1163, lng:-122.9574, tier:'circle',
+  {id:'whistler', url:'https://www.whistlerblackcomb.com/the-mountain/mountain-conditions/snow-and-weather-report.aspx', name:'Whistler Blackcomb', region:'British Columbia, Canada', lat:50.1163, lng:-122.9574, tier:'circle',
     descEn:"Largest lift network on the pass in Canada, unlimited access.", descZh:"Pass在加拿大境内规模最大的雪场，无限次进场。",
     bestEn:'Jan – Mar', bestZh:'1月–3月', opensEn:'Late Nov', opensZh:'11月下旬'},
-  {id:'parkcity', name:'Park City', region:'Utah, USA', lat:40.6461, lng:-111.4980, tier:'circle',
+  {id:'parkcity', url:'https://www.parkcitymountain.com/the-mountain/mountain-conditions/snow-and-weather-report.aspx', name:'Park City', region:'Utah, USA', lat:40.6461, lng:-111.4980, tier:'circle',
     descEn:"Largest single ski area in the US. Famous for dry, light powder.", descZh:"美国最大单一雪场，以干燥轻盈的粉雪出名。",
     bestEn:'Jan – Feb', bestZh:'1月–2月', opensEn:'Late Nov', opensZh:'11月下旬'},
-  {id:'vail', name:'Vail + Beaver Creek', region:'Colorado, USA', lat:39.6403, lng:-106.3742, tier:'circle',
+  {id:'vail', url:'https://www.vail.com/the-mountain/mountain-conditions/snow-and-weather-report.aspx', name:'Vail + Beaver Creek', region:'Colorado, USA', lat:39.6403, lng:-106.3742, tier:'circle',
     descEn:"The flagship — biggest scale and lift infrastructure on the pass.", descZh:"Pass的旗舰雪场，规模和缆车系统都是顶级水准。",
     bestEn:'Jan – mid Mar', bestZh:'1月–3月中', opensEn:'Late Nov', opensZh:'11月下旬'},
-  {id:'breck', name:'Breckenridge + Keystone', region:'Colorado, USA', lat:39.4817, lng:-106.0384, tier:'circle',
+  {id:'breck', url:'https://www.breckenridge.com/the-mountain/mountain-conditions/snow-and-weather-report.aspx', name:'Breckenridge + Keystone', region:'Colorado, USA', lat:39.4817, lng:-106.0384, tier:'circle',
     descEn:"Close enough to link into a single Summit County trip.", descZh:"两个雪场离得很近，可以一趟车串联。",
     bestEn:'Jan – Mar', bestZh:'1月–3月', opensEn:'Mid Nov', opensZh:'11月中'},
-  {id:'stevens', name:'Stevens Pass', region:'Washington, USA', lat:47.7448, lng:-121.0890, tier:'circle',
+  {id:'stevens', url:'https://www.stevenspass.com/the-mountain/mountain-conditions/snow-and-weather-report.aspx', name:'Stevens Pass', region:'Washington, USA', lat:47.7448, lng:-121.0890, tier:'circle',
     descEn:"Closest unlimited US option to a Vancouver base — about a 4h drive.", descZh:"离温哥华出发最近的美国无限次雪场，车程约4小时。",
     bestEn:'Jan – Feb', bestZh:'1月–2月', opensEn:'Early Dec', opensZh:'12月初'},
-  {id:'tahoe', name:'Heavenly / Northstar / Kirkwood', region:'Lake Tahoe, USA', lat:38.9353, lng:-119.9400, tier:'circle',
+  {id:'tahoe', url:'https://www.skiheavenly.com/the-mountain/mountain-conditions/snow-and-weather-report.aspx', name:'Heavenly / Northstar / Kirkwood', region:'Lake Tahoe, USA', lat:38.9353, lng:-119.9400, tier:'circle',
     descEn:"Three resorts around one lake, with big lake views.", descZh:"三个雪场环绕同一个湖，湖景开阔。",
     bestEn:'Jan – Mar', bestZh:'1月–3月', opensEn:'Late Nov', opensZh:'11月下旬'},
-  {id:'stowe', name:'Stowe', region:'Vermont, USA', lat:44.5303, lng:-72.7815, tier:'circle',
+  {id:'stowe', url:'https://www.stowe.com/the-mountain/mountain-conditions/snow-and-weather-report.aspx', name:'Stowe', region:'Vermont, USA', lat:44.5303, lng:-72.7815, tier:'circle',
     descEn:"Classic New England skiing, best for an east-coast leg.", descZh:"经典新英格兰滑雪风格，适合东岸行程。",
     bestEn:'Jan – Feb', bestZh:'1月–2月', opensEn:'Late Nov', opensZh:'11月下旬'},
-  {id:'kickinghorse', name:'Kicking Horse', region:'Golden, BC', lat:51.2985, lng:-117.0489, tier:'square',
+  {id:'kickinghorse', url:'https://kickinghorseresort.com/conditions/', name:'Kicking Horse', region:'Golden, BC', lat:51.2985, lng:-117.0489, tier:'square',
     descEn:"Steep terrain, dry interior powder. Shares the 7-day RCR pool.", descZh:"地形陡峭，内陆干粉雪出名。共用RCR的7天额度。",
     bestEn:'Jan – Feb', bestZh:'1月–2月', opensEn:'Early Dec', opensZh:'12月初'},
-  {id:'fernie', name:'Fernie', region:'Kootenays, BC', lat:49.4631, lng:-115.0890, tier:'square',
+  {id:'fernie', url:'https://skifernie.com/conditions/', name:'Fernie', region:'Kootenays, BC', lat:49.4631, lng:-115.0890, tier:'square',
     descEn:"Deep, consistent snowfall across five alpine bowls. Shares the RCR pool.", descZh:"降雪稳定量大，五个高山碗地形。共用RCR的7天额度。",
     bestEn:'Jan – Feb', bestZh:'1月–2月', opensEn:'Early-mid Dec', opensZh:'12月初到中旬'},
-  {id:'kimberley', name:'Kimberley', region:'Kootenays, BC', lat:49.6675, lng:-115.9781, tier:'square',
+  {id:'kimberley', url:'https://skikimberley.com/conditions/', name:'Kimberley', region:'Kootenays, BC', lat:49.6675, lng:-115.9781, tier:'square',
     descEn:"Smaller and quieter, good for a lighter day. Shares the RCR pool.", descZh:"规模较小人少，适合轻松的一天。共用RCR的7天额度。",
     bestEn:'Jan – Feb', bestZh:'1月–2月', opensEn:'Early Dec', opensZh:'12月初'},
-  {id:'nakiska', name:'Nakiska', region:'Kananaskis, AB', lat:50.9467, lng:-115.1508, tier:'square',
+  {id:'nakiska', url:'https://skinakiska.com/conditions/', name:'Nakiska', region:'Kananaskis, AB', lat:50.9467, lng:-115.1508, tier:'square',
     descEn:"Heavy snowmaking investment — usually opens earliest of the RCR group.", descZh:"造雪投入大，通常是RCR几个雪场里最早开板的。",
     bestEn:'Dec – Feb', bestZh:'12月–2月', opensEn:'Mid Nov', opensZh:'11月中'},
-  {id:'verbier', name:'Verbier / 4 Vallées', region:'Valais, Switzerland', lat:46.0965, lng:7.2283, tier:'diamond',
+  {id:'verbier', url:'https://www.verbier4vallees.ch/en/winter/snow-report', name:'Verbier / 4 Vallées', region:'Valais, Switzerland', lat:46.0965, lng:7.2283, tier:'diamond',
     descEn:"The deepest terrain and off-piste on the pass. 5 consecutive days per season.", descZh:"Pass里地形和野雪最丰富的雪场，每季连续5天额度。",
     bestEn:'Jan – Mar', bestZh:'1月–3月', opensEn:'Early Dec', opensZh:'12月初'},
-  {id:'trois', name:'Les 3 Vallées', region:'Savoie, France', lat:45.2977, lng:6.5804, tier:'diamond',
+  {id:'trois', url:'https://www.les3vallees.com/en/winter/snow-report', name:'Les 3 Vallées', region:'Savoie, France', lat:45.2977, lng:6.5804, tier:'diamond',
     descEn:"The largest connected ski area on earth. 7 consecutive days per season.", descZh:"全世界最大的连续滑雪区，每季连续7天额度。",
     bestEn:'Mid Jan – Feb', bestZh:'1月中–2月', opensEn:'Early Dec', opensZh:'12月初'},
-  {id:'arlberg', name:'Ski Arlberg', region:'St. Anton / Lech, Austria', lat:47.1288, lng:10.2639, tier:'diamond',
+  {id:'arlberg', url:'https://www.skiarlberg.at/en/service/snow-report', name:'Ski Arlberg', region:'St. Anton / Lech, Austria', lat:47.1288, lng:10.2639, tier:'diamond',
     descEn:"Legendary off-piste and après culture. Requires a designated partner hotel.", descZh:"以野雪和滑雪文化出名，需通过指定合作酒店预订才能兑换缆车权限。",
     bestEn:'Jan – Mar', bestZh:'1月–3月', opensEn:'Early Dec', opensZh:'12月初'},
-  {id:'andermatt', name:'Andermatt–Sedrun', region:'Uri, Switzerland', lat:46.6336, lng:8.5921, tier:'diamond',
+  {id:'andermatt', url:'https://www.andermatt-sedrun-sport.ch/en/winter/snow-report', name:'Andermatt–Sedrun', region:'Uri, Switzerland', lat:46.6336, lng:8.5921, tier:'diamond',
     descEn:"High alpine terrain with a long season into spring.", descZh:"高海拔地形，雪季能一直延续到春天。",
     bestEn:'Jan – Apr', bestZh:'1月–4月', opensEn:'Early Dec', opensZh:'12月初'},
-  {id:'hakuba', name:'Hakuba Valley', region:'Nagano, Japan', lat:36.6985, lng:137.8460, tier:'diamond',
+  {id:'hakuba', url:'https://www.hakubavalley.com/en/snow-report/', name:'Hakuba Valley', region:'Nagano, Japan', lat:36.6985, lng:137.8460, tier:'diamond',
     descEn:"Nine linked resorts, the deepest terrain on Honshu.", descZh:"九个雪场相连，本州地形最丰富的区域。",
     bestEn:'Jan – early Feb', bestZh:'1月–2月初', opensEn:'Early Dec', opensZh:'12月初'},
-  {id:'rusutsu', name:'Rusutsu', region:'Hokkaido, Japan', lat:42.7469, lng:140.8968, tier:'diamond',
+  {id:'rusutsu', url:'https://rusutsu.com/en/snow-report/', name:'Rusutsu', region:'Hokkaido, Japan', lat:42.7469, lng:140.8968, tier:'diamond',
     descEn:"Tree runs, the most snow-reliable region in Japan.", descZh:"树林雪道，日本雪况最稳定可靠的区域。",
     bestEn:'Jan – Feb', bestZh:'1月–2月', opensEn:'Early Dec', opensZh:'12月初'},
 ];
@@ -527,24 +644,51 @@ async function fetchWeather(r){
   const box = document.getElementById('weatherBox');
   const t = I18N[currentLang];
   try{
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${r.lat}&longitude=${r.lng}&current=temperature_2m&daily=snowfall_sum&forecast_days=3&timezone=auto`;
+    // forecast_days=3 gives the next 3 days; past_days=7 returns the previous 7 days of
+    // actual measured snowfall in the same daily array, ahead of today's entry.
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${r.lat}&longitude=${r.lng}`
+      + `&current=temperature_2m&daily=snowfall_sum&past_days=7&forecast_days=3&timezone=auto`;
     const res = await fetch(url);
     if(!res.ok) throw new Error('bad response');
     const data = await res.json();
     if(!activeResort || activeResort.id !== r.id) return; // stale click guard
-    const temp = data.current && typeof data.current.temperature_2m === 'number' ? data.current.temperature_2m.toFixed(0) : '—';
-    const snowSum = (data.daily && data.daily.snowfall_sum) ? data.daily.snowfall_sum.reduce((a,b)=>a+(b||0),0) : null;
-    const snowCm = snowSum !== null ? (snowSum).toFixed(0) : '—';
+
+    const temp = (data.current && typeof data.current.temperature_2m === 'number')
+      ? data.current.temperature_2m.toFixed(0) : '—';
+
+    let pastCm = '—', nextCm = '—';
+    if(data.daily && Array.isArray(data.daily.snowfall_sum) && Array.isArray(data.daily.time)){
+      const days = data.daily.time;
+      const vals = data.daily.snowfall_sum;
+      const todayStr = new Date().toISOString().slice(0,10);
+      let todayIdx = days.indexOf(todayStr);
+      if(todayIdx === -1) todayIdx = 7; // fall back to the documented layout
+      const past = vals.slice(0, todayIdx).reduce((a,b)=>a+(b||0), 0);
+      const next = vals.slice(todayIdx, todayIdx+3).reduce((a,b)=>a+(b||0), 0);
+      pastCm = past.toFixed(0);
+      nextCm = next.toFixed(0);
+    }
+
+    const link = r.url
+      ? `<a class="official-link" href="${r.url}" target="_blank" rel="noopener">${t.officialLink}<span class="arrow">↗</span></a>
+         <div class="basedepth-note">${t.baseNote}</div>`
+      : '';
+
     box.innerHTML = `
       <div class="wh"><span class="pulse"></span>${t.weatherHead}</div>
       <div class="weather-stats">
         <div><div class="v">${temp}°</div><div class="l">${t.weatherTemp}</div></div>
-        <div><div class="v">${snowCm}</div><div class="l">${t.weatherSnow}</div></div>
+        <div><div class="v">${nextCm}</div><div class="l">${t.weatherSnow}</div></div>
       </div>
-    `;
+      <div class="weather-sub">
+        <span class="l">${t.weatherPast}</span>
+        <span class="v">${pastCm} cm</span>
+      </div>
+    ` + link;
   }catch(e){
     if(!activeResort || activeResort.id !== r.id) return;
-    box.innerHTML = `<div class="wh">${t.weatherHead}</div><div class="weather-err">${t.weatherErr}</div>`;
+    const link = r.url ? `<a class="official-link" href="${r.url}" target="_blank" rel="noopener">${t.officialLink}<span class="arrow">↗</span></a>` : '';
+    box.innerHTML = `<div class="wh">${t.weatherHead}</div><div class="weather-err">${t.weatherErr}</div>` + link;
   }
 }
 
@@ -608,6 +752,115 @@ function renderCalendar(){
   });
   document.getElementById('calGrid').innerHTML = html;
 }
+
+/* ---------------- Season day tracker (localStorage) ---------------- */
+const STORE_KEY = 'epicPassSeasonLog_v1';
+const RCR_QUOTA = 7;
+const RCR_IDS = ['fernie','kickinghorse','kimberley','nakiska'];
+
+function loadLog(){
+  try{
+    const raw = localStorage.getItem(STORE_KEY);
+    const parsed = raw ? JSON.parse(raw) : [];
+    return Array.isArray(parsed) ? parsed : [];
+  }catch(e){ return []; }
+}
+function saveLog(log){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(log)); }
+  catch(e){ /* private mode or quota — tracker still works for this session */ }
+}
+let seasonLog = loadLog();
+
+function populateResortSelect(){
+  const sel = document.getElementById('logResort');
+  if(!sel) return;
+  const prev = sel.value;
+  const order = ['square','circle','diamond'];
+  const sorted = [...RESORTS].sort((a,b)=> order.indexOf(a.tier) - order.indexOf(b.tier));
+  sel.innerHTML = sorted.map(r=>`<option value="${r.id}">${r.name}</option>`).join('');
+  if(prev) sel.value = prev;
+}
+
+function renderTracker(){
+  const t = I18N[currentLang];
+  const rcrUsed = seasonLog.filter(e => RCR_IDS.includes(e.id)).length;
+  const remaining = Math.max(0, RCR_QUOTA - rcrUsed);
+
+  // quota pips
+  const pips = [];
+  for(let i=0; i<Math.max(RCR_QUOTA, rcrUsed); i++){
+    const cls = i >= RCR_QUOTA ? 'pip over' : (i < rcrUsed ? 'pip used' : 'pip');
+    pips.push(`<div class="${cls}"></div>`);
+  }
+  document.getElementById('quotaVisual').innerHTML = pips.join('');
+  const countEl = document.getElementById('quotaCount');
+  countEl.textContent = `${rcrUsed}/${RCR_QUOTA}`;
+  countEl.classList.toggle('over', rcrUsed > RCR_QUOTA);
+
+  // season tally
+  const uniqueResorts = new Set(seasonLog.map(e=>e.id)).size;
+  document.getElementById('seasonTally').innerHTML = `
+    <div><div class="n">${seasonLog.length}</div><div class="l">${t.trTallyDays}</div></div>
+    <div><div class="n">${uniqueResorts}</div><div class="l">${t.trTallyResorts}</div></div>
+    <div><div class="n">${remaining}</div><div class="l">${t.trTallyPooled}</div></div>
+  `;
+
+  // log rows, newest date first
+  const list = document.getElementById('logList');
+  if(seasonLog.length === 0){
+    list.innerHTML = `<div class="log-empty">${t.trEmpty}</div>`;
+  } else {
+    const sorted = [...seasonLog].sort((a,b)=> b.date.localeCompare(a.date));
+    list.innerHTML = sorted.map(e=>{
+      const r = RESORTS.find(x=>x.id===e.id);
+      const name = r ? r.name : e.id;
+      const tier = r ? r.tier : 'circle';
+      const tagText = tier==='square' ? (currentLang==='en'?'pooled':'共享')
+                    : tier==='circle' ? (currentLang==='en'?'unlimited':'无限次')
+                    : (currentLang==='en'?'partner':'合作');
+      return `<div class="log-row">
+        <span class="when">${e.date}</span>
+        <span class="where">${name}</span>
+        <span class="tag ${tier}">${tagText}</span>
+        <button class="del-btn" data-del="${e.id}|${e.date}" aria-label="delete">×</button>
+      </div>`;
+    }).join('');
+  }
+
+  if(rcrUsed > RCR_QUOTA){
+    list.insertAdjacentHTML('afterbegin',
+      `<div class="log-row" style="color:var(--coral); font-size:12.5px;">${t.trOverQuota}</div>`);
+  }
+
+  list.querySelectorAll('[data-del]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const [id, date] = btn.dataset.del.split('|');
+      seasonLog = seasonLog.filter(e => !(e.id===id && e.date===date));
+      saveLog(seasonLog); renderTracker();
+    });
+  });
+}
+
+document.getElementById('logBtn').addEventListener('click', ()=>{
+  const t = I18N[currentLang];
+  const id = document.getElementById('logResort').value;
+  const date = document.getElementById('logDate').value;
+  if(!date){ alert(t.trNoDate); return; }
+  if(seasonLog.some(e=>e.id===id && e.date===date)){ alert(t.trDupe); return; }
+  seasonLog.push({id, date});
+  saveLog(seasonLog); renderTracker();
+});
+
+document.getElementById('clearLog').addEventListener('click', ()=>{
+  seasonLog = []; saveLog(seasonLog); renderTracker();
+});
+
+// default the date field to today
+const dateInput = document.getElementById('logDate');
+if(dateInput) dateInput.value = new Date().toISOString().slice(0,10);
+
+populateResortSelect();
+renderTracker();
 
 applyLang('en');
 </script>
