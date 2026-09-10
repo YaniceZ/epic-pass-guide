@@ -1,0 +1,13 @@
+{
+  "name": "Epic Pass Field Guide",
+  "short_name": "Epic Guide",
+  "description": "Independent planning reference for Epic Pass holders — access rules by pass type, every resort mapped, live conditions, and a season log.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#FBF8F2",
+  "theme_color": "#FBF8F2",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
